@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import {NextResponse} from "next/server";
 import {z} from "zod";
+import {cleanModelText} from "../../../lib/model-text";
 
 export const runtime="nodejs";
 
@@ -27,10 +28,10 @@ export async function POST(request:Request){
     const model=process.env.OPENAI_MODEL||"gpt-5.6-sol";
     if(input.source!=="planilha"){
       const response=await client.responses.create({model,store:false,reasoning:{effort:"low"},tools:[{type:"web_search"}],instructions,input:`Analise as informações publicamente acessíveis deste perfil e resuma o último mês de treinos. Se a página não estiver pública ou os dados não puderem ser verificados, diga isso claramente. Link: ${input.url}`});
-      return NextResponse.json({configured:true,source:input.source,summary:response.output_text||"Não encontrei dados públicos suficientes para resumir."});
+      return NextResponse.json({configured:true,source:input.source,summary:cleanModelText(response.output_text||"Não encontrei dados públicos suficientes para resumir.")});
     }
     const response=await client.responses.create({model,store:false,reasoning:{effort:"low"},instructions,input:[{role:"user",content:[{type:"input_text",text:"Leia esta captura de uma planilha de treino. Resuma o período visível e os sinais que podem melhorar uma recomendação de rotação de tênis."},{type:"input_image",image_url:input.image,detail:"auto"}]}]});
-    return NextResponse.json({configured:true,source:input.source,summary:response.output_text||"Não consegui extrair dados suficientes desta imagem."});
+    return NextResponse.json({configured:true,source:input.source,summary:cleanModelText(response.output_text||"Não consegui extrair dados suficientes desta imagem.")});
   }catch(error){
     if(error instanceof z.ZodError)return NextResponse.json({error:"Fonte ou arquivo inválido."},{status:400});
     console.error("Profile insight error",error);
