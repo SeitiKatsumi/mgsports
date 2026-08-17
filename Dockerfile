@@ -20,4 +20,4 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 USER nextjs
 EXPOSE 3000
-CMD ["sh","-c","npx prisma db push --skip-generate && npx tsx prisma/seed.ts && node server.js"]
+CMD ["sh","-c","npx prisma db push --force-reset --skip-generate && npx tsx prisma/seed.ts && node server.js"]
