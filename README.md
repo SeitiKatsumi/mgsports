@@ -1,11 +1,5 @@
-# Meu Olympikus
+# Meu Olympikus 2.0
 
-PWA de recomendação, rotação e compra contextual de tênis da Família Corre.
+Wizard conversacional único que recomenda o melhor modelo da Família Corre a partir da experiência com a marca, pares existentes, perfil e treino.
 
-## Desenvolvimento
-
-1. Copie `.env.example` para `.env` e ajuste as variáveis.
-2. Inicie PostgreSQL e aplicação com `docker compose up --build`.
-3. Abra `http://localhost`, `/login`, `/admin` e `/api/health`.
-
-O motor usa scoring ponderado e fatores estruturados, registra a versão `shoe-recommender-1.0.0` e mantém catálogo, matriz e pesos no PostgreSQL.
+As imagens dos cinco modelos são fotografias oficiais da Olympikus, baixadas e otimizadas em WebP. O PostgreSQL guarda o catálogo e as sessões concluídas; a lógica nunca prioriza preço.

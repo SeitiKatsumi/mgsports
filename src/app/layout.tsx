@@ -1,5 +1,2 @@
-import type { Metadata, Viewport } from "next";
-import "./globals.css";
-export const metadata:Metadata={title:"Meu Olympikus — seu treino, seu Corre",description:"Recomendação inteligente de tênis Olympikus para cada treino.",manifest:"/manifest.webmanifest",icons:{icon:"/icon.svg"}};
-export const viewport:Viewport={themeColor:"#f4f4f1",width:"device-width",initialScale:1};
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="pt-BR"><body>{children}</body></html>}
+import type {Metadata,Viewport} from "next";import "./styles.css";
+export const metadata:Metadata={title:"Meu Olympikus — encontre seu Corre",description:"Um agente inteligente para encontrar o tênis certo para cada treino."};export const viewport:Viewport={width:"device-width",initialScale:1,themeColor:"#f3f2ee"};export default function Layout({children}:{children:React.ReactNode}){return <html lang="pt-BR"><body>{children}</body></html>}
