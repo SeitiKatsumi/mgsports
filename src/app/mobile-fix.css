@@ -1,9 +1,0 @@
-@media (max-width: 560px) {
-  .intro .week-ring {
-    position: static;
-    margin: -6px 0 18px auto;
-    width: 88px;
-    height: 88px;
-  }
-  .intro p { padding-right: 0; }
-}
