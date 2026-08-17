@@ -164,6 +164,11 @@
 .confidence-line { align-items: center; background: rgba(231,238,236,.66); border-radius: 12px; color: #7a8078; display: flex; font-size: 9px; gap: 8px; margin-top: 14px; padding: 9px; }
 .confidence-line svg { color: #df7047; height: 16px; width: 16px; }
 .confidence-line b { color: #5d635b; }
+.result-specs { display: grid; gap: 6px; grid-template-columns: 1fr 1fr; margin-top: 13px; }
+.result-specs > span { background: rgba(239,244,242,.65); border: 1px solid rgba(255,255,255,.88); border-radius: 11px; color: #9ba098; display: flex; flex-direction: column; font-size: 7px; line-height: 1.35; padding: 8px; }
+.result-specs b { color: #686e66; font-size: 8px; text-transform: uppercase; }
+.official-spec { align-items: center; color: #d96e47; display: inline-flex; font-size: 8px; font-weight: 700; gap: 6px; letter-spacing: .06em; margin-top: 12px; text-decoration: none; text-transform: uppercase; }
+.official-spec svg { height: 13px; width: 13px; }
 .tech-chip { background: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.9); border-radius: 99px; bottom: 18px; color: #737970; font-size: 7px; font-weight: 700; left: 18px; letter-spacing: .09em; padding: 7px 9px; position: absolute; }
 
 .biomech-summary { backdrop-filter: blur(24px); background: rgba(255,255,255,.42); border: 1px solid rgba(255,255,255,.9); border-radius: 21px; margin-top: 11px; padding: 18px; }
@@ -194,6 +199,8 @@
 .race-pair article > div > b { color: #dc7048; font-size: 9px; }
 .race-pair p { color: #858a82; font-size: 8px; line-height: 1.5; margin: 8px 0; }
 .race-pair article > div > span { color: #9ca098; font-size: 7px; text-transform: uppercase; }
+.race-pair article > div > a { align-items: center; color: #d86d45; display: flex; font-size: 7px; gap: 5px; margin-top: 8px; text-decoration: none; text-transform: uppercase; }
+.race-pair article > div > a svg { height: 11px; width: 11px; }
 
 @keyframes livePulse { 50% { box-shadow: 0 0 0 7px rgba(241,90,36,0); } }
 @keyframes scan { 50% { opacity: .35; transform: scaleX(.55); } }

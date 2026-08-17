@@ -1,8 +1,11 @@
-import {PrismaClient} from "@prisma/client"; const db=new PrismaClient();
-const shoes=[
- {id:"pace",name:"Corre Pace",slug:"corre-pace",category:"Competição",description:"Máxima performance para dias únicos e busca de recorde.",weightGrams:140,dropMm:6,imagePath:"/shoes/pace.webp",officialUrl:"https://www.olympikus.com.br/corre-pace",compatibility:{prova:5,velocidade:5,intervalado:4,tempo:4,longao:2,rodagem:1,recuperacao:0}},
- {id:"supra",name:"Corre Supra 2",slug:"corre-supra-2",category:"Super shoe",description:"Carbono, resposta e estabilidade para provas e treinos-chave.",weightGrams:215,dropMm:6,imagePath:"/shoes/supra.webp",officialUrl:"https://www.olympikus.com.br/tenis-olympikus-corre-supra-2-43777397-3-021/p",compatibility:{prova:5,velocidade:5,intervalado:5,tempo:5,longao:4,rodagem:2,recuperacao:1}},
- {id:"grafeno",name:"Corre Grafeno 3",slug:"corre-grafeno-3",category:"Super treino",description:"Placa de grafeno para velocidade, propulsão e treinos intensos.",weightGrams:238,dropMm:8,imagePath:"/shoes/grafeno.webp",officialUrl:"https://www.olympikus.com.br/tenis-olympikus-corre-grafeno-3-43245330-3-006/p",compatibility:{prova:4,velocidade:5,intervalado:5,tempo:5,longao:3,rodagem:2,recuperacao:1}},
- {id:"corre4",name:"Corre 4",slug:"corre-4",category:"Rodagem versátil",description:"O coringa leve e responsivo para quase todos os treinos.",weightGrams:219,dropMm:8,imagePath:"/shoes/corre4.webp",officialUrl:"https://www.olympikus.com.br/tenis-olympikus-corre-4-43720366-3-002/p",compatibility:{prova:3,velocidade:3,intervalado:3,tempo:4,longao:5,rodagem:5,recuperacao:4}},
- {id:"max",name:"Corre Max",slug:"corre-max",category:"Super amortecimento",description:"Maciez e conforto para recuperação e corridas de menor intensidade.",weightGrams:284,dropMm:8,imagePath:"/shoes/max.webp",officialUrl:"https://www.olympikus.com.br/tenis-olympikus-corre-max-43758365-3-949/p",compatibility:{prova:1,velocidade:0,intervalado:0,tempo:1,longao:4,rodagem:5,recuperacao:5}}
-]; async function main(){for(const s of shoes)await db.shoeModel.upsert({where:{id:s.id},update:s,create:s})} main().finally(()=>db.$disconnect());
+import {Prisma,PrismaClient} from "@prisma/client";
+import {shoes} from "../src/data/shoes";
+
+const db=new PrismaClient();
+async function main(){
+  for(const shoe of shoes){
+    const data={id:shoe.id,name:shoe.name,slug:shoe.slug,category:shoe.cat,description:shoe.desc,weightGrams:shoe.weight,dropMm:shoe.drop,imagePath:shoe.img,officialUrl:shoe.officialUrl,compatibility:JSON.parse(JSON.stringify(shoe.match)) as Prisma.InputJsonValue,technicalProfile:JSON.parse(JSON.stringify({nature:shoe.nature,plate:shoe.plate,plateName:shoe.plateName,plateDetail:shoe.plateDetail,midsole:shoe.midsole,outsole:shoe.outsole,upper:shoe.upper,insole:shoe.insole,landing:shoe.landing,gaitSupport:shoe.gaitSupport,rocker:shoe.rocker,idealUses:shoe.idealUses,avoidUses:shoe.avoidUses,strengths:shoe.strengths,limits:shoe.limits})) as Prisma.InputJsonValue};
+    await db.shoeModel.upsert({where:{id:shoe.id},update:data,create:data});
+  }
+}
+main().finally(()=>db.$disconnect());

@@ -16,6 +16,7 @@ model ShoeModel {
   imagePath String
   officialUrl String
   compatibility Json
+  technicalProfile Json?
   active Boolean @default(true)
   createdAt DateTime @default(now())
 }
@@ -31,7 +32,7 @@ model WizardSession {
   recommendation String?
   score Int?
   biomechanics Json?
-  algorithmVersion String @default("wizard-recommender-3.0.0")
+  algorithmVersion String @default("wizard-recommender-3.1.0")
   completedAt DateTime?
   createdAt DateTime @default(now())
 }
