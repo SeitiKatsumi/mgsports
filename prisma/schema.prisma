@@ -30,7 +30,8 @@ model WizardSession {
   ownedShoes String[]
   recommendation String?
   score Int?
-  algorithmVersion String @default("wizard-recommender-2.0.0")
+  biomechanics Json?
+  algorithmVersion String @default("wizard-recommender-3.0.0")
   completedAt DateTime?
   createdAt DateTime @default(now())
 }
