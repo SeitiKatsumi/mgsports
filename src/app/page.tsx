@@ -12,7 +12,7 @@ type RankedShoe=(typeof shoes)[number]&{score:number;reasons:string[]};
 const baseSteps=["experiencia","tenis","perfil","intencao","treino","biomecanica","resultado","loja"] as const; type StepName=typeof baseSteps[number];
 const stepLabels:Record<StepName,string>={experiencia:"Início",tenis:"Meus Corres",perfil:"Perfil",intencao:"Objetivo",treino:"Treino",biomecanica:"Leitura",resultado:"Análise",loja:"Loja"};
 const workoutLabels:Record<Workout,string>={recuperacao:"recuperação",rodagem:"rodagem leve",longao:"longão",tempo:"tempo / limiar",intervalado:"intervalado",velocidade:"velocidade",prova:"prova"};
-const initialData:Data={experience:"",owned:[],race:"10K",raceTime:"50:00",weight:"72",height:"178",age:"32",intent:"",workout:"rodagem",plateLoad:"none",legs:"normal",discomfort:"none",landing:"unknown",gait:"unknown",location:false};
+const initialData:Data={experience:"",owned:[],race:"5K",raceTime:"16",weight:"65",height:"175",age:"48",intent:"",workout:"rodagem",plateLoad:"none",legs:"normal",discomfort:"none",landing:"unknown",gait:"unknown",location:false};
 
 function scoreShoe(shoe:(typeof shoes)[number],data:Data):RankedShoe{
   let score=58+shoe.match[data.workout]*7; const reasons=[`Compatibilidade principal com ${workoutLabels[data.workout]}.`]; const isRace=data.workout==="prova"; const longRace=["Meia maratona","Maratona"].includes(data.race);
