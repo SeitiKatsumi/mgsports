@@ -1,2 +1,2 @@
-import type {Metadata,Viewport} from "next";import "./styles.css";
+import type {Metadata,Viewport} from "next";import "./styles.css";import "./refinement.css";
 export const metadata:Metadata={title:"Meu Olympikus — encontre seu Corre",description:"Um agente inteligente para encontrar o tênis certo para cada treino."};export const viewport:Viewport={width:"device-width",initialScale:1,themeColor:"#f3f2ee"};export default function Layout({children}:{children:React.ReactNode}){return <html lang="pt-BR"><body>{children}</body></html>}
