@@ -65,6 +65,34 @@
 .stage { grid-template-columns: 230px minmax(540px,800px) 155px; padding-top: 68px; }
 .agent { padding-top: 48px; }
 .agent-orb { height: 134px; width: 134px; }
+.agent-core {
+  align-items: center;
+  backdrop-filter: blur(14px);
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(255,255,255,.96);
+  border-radius: 50%;
+  box-shadow: 0 12px 30px rgba(76,82,75,.1), inset 0 0 0 7px rgba(236,241,239,.52);
+  display: flex;
+  height: 78px;
+  justify-content: center;
+  position: relative;
+  width: 78px;
+  z-index: 2;
+}
+.agent-core img { height: auto; width: 52px; }
+.agent-core .ai-core-spark {
+  background: rgba(255,255,255,.9);
+  border: 1px solid rgba(255,255,255,.98);
+  border-radius: 50%;
+  color: #ef7145;
+  filter: drop-shadow(0 4px 7px rgba(222,102,62,.18));
+  height: 21px;
+  padding: 4px;
+  position: absolute;
+  right: -1px;
+  top: 4px;
+  width: 21px;
+}
 .agent-orb:before { border: 1px solid rgba(255,255,255,.9); border-radius: 50%; content: ""; inset: -8px; position: absolute; }
 .agent-orb .orbit-two { inset: 23px; animation-direction: reverse; animation-duration: 13s; border-style: dashed; opacity: .52; }
 .agent-orb > i { background: #ef774b; border: 3px solid #f6f6f2; border-radius: 50%; height: 9px; position: absolute; width: 9px; }
@@ -219,6 +247,9 @@
   .stage { padding-top: 24px; }
   .agent { background: rgba(255,255,255,.3); border: 1px solid rgba(255,255,255,.72); border-radius: 16px; padding: 7px 9px; }
   .agent-orb { height: 44px; width: 44px; }
+  .agent-core { box-shadow: inset 0 0 0 3px rgba(236,241,239,.6); height: 34px; width: 34px; }
+  .agent-core img { width: 24px; }
+  .agent-core .ai-core-spark { height: 12px; padding: 2px; right: -3px; top: -2px; width: 12px; }
   .agent-orb:before,.agent-orb > i,.orbit-two { display:none; }
   .agent-label span { font-size: 16px; }
   .xp-pill { background: transparent; border: 0; box-shadow: none; }
