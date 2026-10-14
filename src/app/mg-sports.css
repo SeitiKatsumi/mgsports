@@ -1,0 +1,47 @@
+.brand-centered img { display:block; height:84px; object-fit:contain; width:150px; }
+.agent-core img { width:56px; }
+.oly-mini-orb img { height:24px; object-fit:contain; width:32px; }
+.catalog-search { display:grid; grid-template-columns:1.6fr 1fr 1.1fr; gap:8px; }
+.catalog-search label { align-items:center; display:flex; padding:0 12px; }
+.catalog-search label,.catalog-search select { background:rgba(255,255,255,.72); border:1px solid #fff; border-radius:14px; color:#6a7067; min-height:48px; }
+.catalog-search input { border:0; background:transparent; color:#626960; font-size:12px; min-width:0; outline:0; padding:10px; width:100%; }
+.catalog-search svg { color:#e77832; flex:none; width:17px; }
+.catalog-search select { font-size:10px; min-width:0; padding:10px; }
+.catalog-count,.catalog-note { color:#858c81; font-size:11px; line-height:1.6; }
+.shoe-select button { min-width:0; }
+.shoe-select b { font-size:11px; line-height:1.35; margin-top:5px; }
+.show-more { display:block; background:rgba(255,255,255,.68); border:1px solid #fff; border-radius:14px; color:#747a72; cursor:pointer; font-size:11px; margin:14px auto 0; padding:12px 20px; }
+.buy-product { align-items:center; background:linear-gradient(145deg,#fff,#eef3f1); border:1px solid #fff; border-radius:15px; color:#c66929; display:flex; font-size:11px; font-weight:600; gap:9px; justify-content:center; line-height:1.4; margin-top:16px; padding:14px; text-decoration:none; transition:transform .2s; }
+.buy-product:hover { transform:translateY(-2px); }
+.buy-product svg { flex:none; height:17px; width:17px; }
+.purchase-product { background:rgba(255,255,255,.58); border:1px solid #fff; border-radius:23px; display:grid; gap:22px; grid-template-columns:40% 1fr; margin-bottom:18px; padding:24px; }
+.purchase-product img { height:230px; object-fit:contain; mix-blend-mode:multiply; width:100%; }
+.purchase-product>div { align-self:center; min-width:0; }
+.purchase-product span { color:#c76b2f; font-size:9px; font-weight:700; letter-spacing:.09em; }
+.purchase-product h2 { color:#596056; font:600 23px/1.15 'Space Grotesk',sans-serif; text-transform:uppercase; }
+.purchase-product p,.catalog-empty p { color:#838a7f; font-size:11px; line-height:1.6; }
+.catalog-empty { background:rgba(255,255,255,.5); border:1px solid #fff; border-radius:22px; padding:25px; }
+.catalog-empty>svg { color:#d67937; }
+.catalog-empty h2 { color:#62695e; font-size:22px; }
+.result-copy h2 { font-size:25px; line-height:1.15; overflow-wrap:anywhere; }
+.result-copy p { display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden; }
+.store-results article .store-unit-actions { display:flex; flex-direction:column; gap:6px; }
+.store-unit-actions a { align-items:center; background:rgba(255,255,255,.7); border:1px solid #fff; border-radius:11px; color:#757d70; display:flex; font-size:9px; gap:5px; padding:9px; text-decoration:none; }
+.store-unit-actions svg { width:13px; height:13px; }
+.product-brand img,.legal header img { height:74px; object-fit:contain; width:130px; }
+.product-page .product-brand img { width:130px; }
+.product-page .product-intro h1 { font-size:clamp(32px,4vw,52px); line-height:1.02; }
+.source-description { white-space:pre-line; color:#7d8577; font-size:12px; line-height:1.8; }
+.mg-sports .choices button>span:nth-child(2) { font-size:11px; }
+@media(max-width:950px) { .brand-centered img { width:130px; } }
+@media(max-width:650px) {
+  .brand-centered img { height:72px; width:110px; }
+  .agent-core img { width:26px; }
+  .catalog-search { grid-template-columns:1fr 1fr; }
+  .catalog-search label { grid-column:1/-1; }
+  .purchase-product { grid-template-columns:1fr; gap:8px; padding:20px; }
+  .purchase-product img { height:170px; }
+  .store-results article .store-unit-actions { flex-direction:row; grid-column:2; }
+  .mg-sports .result-copy h2 { font-size:25px; }
+  .mg-sports footer { padding-right:80px; gap:12px; }
+}

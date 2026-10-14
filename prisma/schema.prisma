@@ -11,8 +11,8 @@ model ShoeModel {
   slug String @unique
   category String
   description String
-  weightGrams Int
-  dropMm Int
+  weightGrams Int?
+  dropMm Int?
   imagePath String
   officialUrl String
   compatibility Json
@@ -33,7 +33,7 @@ model WizardSession {
   score Int?
   biomechanics Json?
   trainingContext Json?
-  algorithmVersion String @default("wizard-recommender-3.2.0")
+  algorithmVersion String @default("mg-tm-recommender-4.0.0")
   completedAt DateTime?
   createdAt DateTime @default(now())
 }
