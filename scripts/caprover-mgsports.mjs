@@ -47,5 +47,5 @@ if(mode==="setup"){
   const result=await (await fetch(webhook,{method:"POST"})).json();if(result.status!==100)throw new Error("Build trigger failed");console.log("Build do GitHub acionado.");
 }else{
   const apps=await definitions();for(const name of [dbName,appName]){const app=apps.find(item=>item.appName===name);if(!app){console.log(`${name}: ainda não criado`);continue}console.log(JSON.stringify({name,building:app.isAppBuilding,version:app.deployedVersion,domains:app.customDomain,latestVersion:app.versions.at(-1)?.version,latestCommit:app.versions.at(-1)?.gitHash}));}
-  const build=await api(`apps/appData/${appName}`);console.log(JSON.stringify(build));
+  const build=await api(`apps/appData/${appName}`);const logs=(build.logs?.lines||[]).slice(-15).map(line=>String(line).replace(/https:\/\/[^\s@]+@/g,"https://[redacted]@").replace(/(?:gh[pousr]_[A-Za-z0-9_]+|github_pat_[A-Za-z0-9_]+|sk-[A-Za-z0-9_-]+)/g,"[redacted]"));console.log(JSON.stringify({building:build.isAppBuilding,failed:build.isBuildFailed,logs}));
 }
