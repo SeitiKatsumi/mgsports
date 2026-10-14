@@ -18,7 +18,7 @@ No painel, use **Posts → Adicionar novo**, preencha título e conteúdo e marq
 - O NGINX da aplicação `mgsports` encaminha apenas `/conteudo/` para WordPress. App, HTTPS e PostgreSQL existentes são preservados.
 - Segredos ficam nas variáveis do CapRover. `WP_ADMIN_EMAIL`, `WP_ADMIN_USER` e `WP_ADMIN_PASSWORD` são usados na instalação inicial. Alterar a variável não redefine a senha de uma instalação existente: use o fluxo normal de recuperação/administração do WordPress.
 
-Scripts: `node scripts/caprover-wordpress.mjs setup`, `status`, `route` e `deploy`. O setup exige `CAPROVER_PASSWORD` e `WP_ADMIN_EMAIL`; não coloque seus valores em arquivos versionados. A rota só deve ser ativada após o WordPress estar preparado. A cópia anterior do template NGINX fica em `.cache/mgsports-nginx-before-wordpress.ejs` para recuperação.
+Scripts: `node scripts/caprover-wordpress.mjs setup`, `status`, `route` e `deploy`. A aplicação usa `./captain-definition-wordpress`, na raiz do repositório, para manter o contexto de build correto também na versão do CapRover deste servidor. O setup exige `CAPROVER_PASSWORD` e `WP_ADMIN_EMAIL`; não coloque seus valores em arquivos versionados. A rota só deve ser ativada após o WordPress estar preparado. A cópia anterior do template NGINX fica em `.cache/mgsports-nginx-before-wordpress.ejs` para recuperação.
 
 O build executa lint de PHP, testes do importador e validação da fonte oficial. O bootstrap valida banco, tema ativo e categoria. Os webhooks do mesmo repositório atualizam os containers existentes de forma independente.
 
