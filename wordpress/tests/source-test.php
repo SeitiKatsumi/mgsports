@@ -2,6 +2,8 @@
 require __DIR__.'/../theme/inc/store-source.php';
 function check(bool $condition, string $message): void { if (!$condition) throw new RuntimeException($message); }
 check(mg_source_url('/categoria/corrida/') === 'https://www.mgsports.com.br/categoria/corrida/', 'Link relativo');
+check(mg_source_url('categoria/calcados/') === 'https://www.mgsports.com.br/categoria/calcados/', 'Link relativo sem barra inicial');
+check(mg_source_url('produto/busca/?q=masculino&amp;submit') === 'https://www.mgsports.com.br/produto/busca/?q=masculino&submit', 'Busca relativa com query');
 check(mg_source_url('javascript:alert(1)') === '', 'Script rejeitado');
 check(mg_source_url('https://www.mgsports.com.br.attacker.test/') === '', 'Host falso rejeitado');
 check(mg_source_url('https://user@www.mgsports.com.br/') === '', 'Credencial em URL rejeitada');

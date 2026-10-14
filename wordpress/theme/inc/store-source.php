@@ -3,6 +3,7 @@ function mg_source_url(string $value, bool $image = false): string {
     $value = trim(html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
     if (str_starts_with($value, '//')) $value = 'https:' . $value;
     elseif (str_starts_with($value, '/')) $value = 'https://www.mgsports.com.br' . $value;
+    elseif ($value !== '' && parse_url($value, PHP_URL_SCHEME) === null) $value = 'https://www.mgsports.com.br/' . $value;
     $parts = parse_url($value);
     $hosts = $image ? ['shoppubcdn.com', 'cdn.shoppub.io', 'uploads.shoppub.io'] : ['www.mgsports.com.br', 'mgsports.com.br', 'www.facebook.com', 'www.instagram.com', 'api.whatsapp.com', 'wa.me'];
     return ($parts['scheme'] ?? '') === 'https' && in_array($parts['host'] ?? '', $hosts, true) && !isset($parts['user']) && !isset($parts['port']) ? $value : '';
@@ -10,8 +11,6 @@ function mg_source_url(string $value, bool $image = false): string {
 function mg_extract_store(string $html): array {
     $document = new DOMDocument();
     $previous = libxml_use_internal_errors(true);
-    // DOMDocument usa HTML4; normalizar contêineres HTML5 preserva listas aninhadas.
-    $html=preg_replace('/<(\/?)(article|section)(\s|>)/i','<$1div$3',$html);
     $document->loadHTML('<?xml encoding="UTF-8">' . $html, LIBXML_NONET);
     libxml_clear_errors(); libxml_use_internal_errors($previous);
     $xpath = new DOMXPath($document);
