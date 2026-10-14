@@ -29,6 +29,11 @@ if (!is_blog_installed()) {
 switch_theme('mg-content');
 $owner=get_user_by('login',getenv('WP_ADMIN_USER'));
 if ($owner) wp_set_current_user($owner->ID);
+update_option('WPLANG','pt_BR');
+update_option('timezone_string','America/Sao_Paulo');
+update_option('gmt_offset',-3);
+update_option('date_format','d/m/Y'); update_option('time_format','H:i');
+if ($owner) update_user_meta($owner->ID,'locale','pt_BR');
 if (!get_option('mg_content_setup_version')) {
     $category=get_term_by('slug','seo-macro','category');
     if (!$category) {
@@ -52,9 +57,14 @@ if (!get_option('mg_content_setup_version')) {
         .'<h2>Atualizações</h2><p>Esta política deve ser revisada se forem adicionados formulários, comentários, analytics, marketing ou novas integrações. Consulte também a <a href="https://www.mgsports.com.br/institucional/politica-de-privacidade/">política da loja oficial</a>.</p>'], true);
     if (is_wp_error($privacy)) throw new RuntimeException('Não foi possível criar a política de privacidade.');
     update_option('wp_page_for_privacy_policy', $privacy);
-    flush_rewrite_rules(true);
     update_option('mg_content_setup_version', '1.0.0');
 }
+require_once ABSPATH.'wp-admin/includes/misc.php';
+$wp_rewrite->init();
+flush_rewrite_rules(false);
+$rewriteRules=$wp_rewrite->mod_rewrite_rules();
+if (!str_contains($rewriteRules,'RewriteBase /conteudo/')) throw new RuntimeException('Base de links permanentes inválida.');
+if (!insert_with_markers(ABSPATH.'.htaccess','WordPress',explode("\n",trim($rewriteRules)))) throw new RuntimeException('Não foi possível gravar as regras de links permanentes.');
 $category=get_term_by('slug','seo-macro','category');
 if (!$category || $category->name!=='SEO Macro' || get_option('stylesheet')!=='mg-content') throw new RuntimeException('Validação final do WordPress falhou.');
 echo "Tema MG Sports ativo, home configurada e categoria SEO Macro verificada.\n";

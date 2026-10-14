@@ -22,6 +22,8 @@ Scripts: `node scripts/caprover-wordpress.mjs setup`, `status`, `route` e `deplo
 
 O build executa lint de PHP, testes do importador e validação da fonte oficial. O bootstrap valida banco, tema ativo e categoria. Os webhooks do mesmo repositório atualizam os containers existentes de forma independente.
 
+Idioma do site e do administrador: `pt_BR`. Fuso: `America/Sao_Paulo` (Brasília), data `d/m/Y` e hora `H:i`. O bootstrap regenera apenas o bloco WordPress de `.htaccess`, com base `/conteudo/`, preservando outros blocos. Diretórios de plugins, uploads, instalação temporária e idiomas pertencem a `www-data`; o início do container verifica que o usuário do Apache pode gravar neles, sem permissões globais `777`.
+
 ## Privacidade e manutenção
 
 O tema não instala analytics, cookies de publicidade ou formulários de captação. O WordPress mantém sua autenticação administrativa; imagens externas são descritas na política nativa em `/conteudo/privacidade/`. Referência legal: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm.
