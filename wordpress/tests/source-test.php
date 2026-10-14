@@ -12,5 +12,8 @@ $data = mg_extract_store('<nav class="nav-menu"><ul class="main-menu">'.$items.'
 check(count($data['menu'])===5 && count($data['footer'])===5, 'Estrutura importada');
 check($data['menu'][0]['groups'][0]['links'][0]['title']==='Corrida', 'Submenu preservado');
 check($data['contacts'][0]==='(16) 99965-3646', 'Contato preservado');
+$real=mg_extract_store(file_get_contents(__DIR__.'/../source.html'));
+$footwear=array_values(array_filter($real['menu'],fn($item)=>$item['title']==='Calçados'))[0];
+check(in_array('Masculino',array_column($footwear['groups'],'title')) && in_array('Feminino',array_column($footwear['groups'],'title')), 'Todos os submenus da fonte real preservados');
 try { mg_extract_store('<html>Sem dados</html>'); throw new RuntimeException('Página incompleta aceita'); } catch (RuntimeException $error) { check(str_contains($error->getMessage(),'ausente'), 'Fonte incompleta rejeitada'); }
 echo "Testes da importação de marca aprovados.\n";

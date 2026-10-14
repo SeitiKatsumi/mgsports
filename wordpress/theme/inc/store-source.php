@@ -10,6 +10,8 @@ function mg_source_url(string $value, bool $image = false): string {
 function mg_extract_store(string $html): array {
     $document = new DOMDocument();
     $previous = libxml_use_internal_errors(true);
+    // DOMDocument usa HTML4; normalizar contêineres HTML5 preserva listas aninhadas.
+    $html=preg_replace('/<(\/?)(article|section)(\s|>)/i','<$1div$3',$html);
     $document->loadHTML('<?xml encoding="UTF-8">' . $html, LIBXML_NONET);
     libxml_clear_errors(); libxml_use_internal_errors($previous);
     $xpath = new DOMXPath($document);
@@ -33,14 +35,14 @@ function mg_extract_store(string $html): array {
         }
         if (!$entry['groups']) {
             $children = [];
-            foreach ($xpath->query('.//section['.$class('submenu-wrapper').']//a', $item) as $child) {
+            foreach ($xpath->query('.//*['.$class('submenu-wrapper').']//a', $item) as $child) {
                 $childLink = $link($child); if ($childLink['url']) $children[] = $childLink;
             }
             if ($children) $entry['groups'][] = ['title'=>$entry['title'], 'url'=>$entry['url'], 'links'=>$children];
         }
         if ($entry['url']) $data['menu'][] = $entry;
     }
-    foreach ($xpath->query('//section['.$class('banner-home').']//figure['.$class('banner-home__item').']') as $item) {
+    foreach ($xpath->query('//*['.$class('banner-home').']//figure['.$class('banner-home__item').']') as $item) {
         $anchor = $xpath->query('.//a', $item)->item(0); $image = $xpath->query('.//img', $item)->item(0);
         if (!$anchor || !$image) continue;
         $url = mg_source_url($anchor->getAttribute('href')); $src = mg_source_url($image->getAttribute('src'), true);
@@ -54,7 +56,7 @@ function mg_extract_store(string $html): array {
         $url = mg_source_url($anchor->getAttribute('href'));
         if (str_contains($url, 'facebook.com') || str_contains($url, 'instagram.com')) $data['social'][] = ['title'=>str_contains($url,'facebook.com')?'Facebook':'Instagram','url'=>$url];
     }
-    $company = $xpath->query('//footer//section[@id="copy"]')->item(0);
+    $company = $xpath->query('//footer//*[@id="copy"]')->item(0);
     if ($company) $data['company'] = trim(preg_replace('/\s+/u', ' ', $company->textContent));
     if (count($data['menu']) < 5 || !$data['hero'] || count($data['footer']) < 5) throw new RuntimeException('Menu, banner ou rodapé ausente na fonte oficial.');
     return $data;
