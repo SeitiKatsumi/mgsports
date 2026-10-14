@@ -20,5 +20,5 @@ export function rankShoes(profile:RunningProfile,items:Shoe[]=shoes):RankedShoe[
     }
     if(shoe.plate===null)reasons.push("A loja não confirma a presença de placa; não assumo uma construção sem placa.");
     return {...shoe,score:Math.max(40,Math.min(96,score)),reasons:reasons.slice(0,3)};
-  }).sort((a,b)=>b.score-a.score);
+  }).sort((a,b)=>(b.priceCents??-1)-(a.priceCents??-1)||b.score-a.score);
 }

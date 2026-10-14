@@ -64,6 +64,9 @@ async function worker(){
     if(!details)throw new Error(`Ficha ausente: ${product.url}`);
     const ld=[...html.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/g)].map(match=>JSON.parse(match[1])).find(item=>item["@type"]==="Product");
     const info=productLists(html).find(item=>item.id===product.id)||product;
+    const offer=Array.isArray(ld?.offers)?ld.offers[0]:ld?.offers;
+    const price=Number(offer?.price??info.price);
+    const priceCents=Number.isFinite(price)&&price>0&&(!offer?.priceCurrency||offer.priceCurrency==="BRL")?Math.round(price*100):null;
     const slug=new URL(product.url).pathname.split("/").filter(Boolean).at(-1);
     const imageSource=ld?.image||info.images?.[0];
     if(!imageSource)throw new Error(`Imagem ausente: ${product.url}`);
@@ -73,7 +76,7 @@ async function worker(){
     const imageBuffer=await readFile(`${root}public${imagePath}`);
     await sharp(imageBuffer).resize({width:640,height:640,fit:"inside",withoutEnlargement:true}).webp({quality:82}).toFile(`${root}public${imagePath}`);
     const assigned=[...new Set([...product.sourceCategories,...(info.categories_names||[]).map(name=>categoryNames[normalize(name)]).filter(Boolean)])];
-    records[index]={id:`tm-${product.id}`,slug,name:ld?.name||info.name,brand:info.brand||ld?.brand?.name||"Não informada",img:imagePath,sourceImage:imageSource,officialUrl:product.url,description:details,categories:assigned,sourceCategoryNames:info.categories_names||[],available:info.available===true,checkedAt:new Date().toISOString().slice(0,10)};
+    records[index]={id:`tm-${product.id}`,slug,name:ld?.name||info.name,brand:info.brand||ld?.brand?.name||"Não informada",img:imagePath,sourceImage:imageSource,officialUrl:product.url,priceCents,description:details,categories:assigned,sourceCategoryNames:info.categories_names||[],available:info.available===true,checkedAt:new Date().toISOString().slice(0,10)};
     done++;if(done%25===0)console.log(`${done}/${records.length} fichas e fotos importadas`);
   }
 }

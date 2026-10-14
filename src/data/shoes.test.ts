@@ -1,5 +1,5 @@
 import {describe,expect,it} from "vitest";
-import {identifyPlate,shoes} from "./shoes";
+import {formatPrice,identifyPlate,shoes} from "./shoes";
 import {categories} from "./categories";
 
 describe("catálogo MG Sports / TM Runners",()=>{
@@ -8,6 +8,11 @@ describe("catálogo MG Sports / TM Runners",()=>{
     expect(new Set(shoes.map(shoe=>shoe.slug)).size).toBe(shoes.length);
     expect(shoes.every(shoe=>shoe.id.startsWith("tm-")&&shoe.officialUrl.startsWith("https://www.lojatmrunners.com.br/produto/"))).toBe(true);
     expect(new Set(shoes.map(shoe=>shoe.brand)).size).toBeGreaterThan(3);
+    expect(shoes.every(shoe=>shoe.priceCents!==null&&Number.isSafeInteger(shoe.priceCents)&&shoe.priceCents>0)).toBe(true);
+  });
+  it("formata o preço em reais sem inventar um valor ausente",()=>{
+    expect(formatPrice(111992).replace(/\s/g," ")).toBe("R$ 1.119,92");
+    expect(formatPrice(null)).toBe("Preço a consultar");
   });
   it("mantém exatamente as sete categorias solicitadas",()=>{
     expect(categories.map(item=>item.label)).toEqual(["Caminhada","Meia maratona","Placa de carbono","Prova","Treino diário","Velocidade","Trilha"]);

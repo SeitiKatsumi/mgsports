@@ -24,6 +24,7 @@
 .catalog-empty>svg { color:#d67937; }
 .catalog-empty h2 { color:#62695e; font-size:22px; }
 .result-copy h2 { font-size:25px; line-height:1.15; overflow-wrap:anywhere; }
+.product-price { color:#596056; font:600 18px/1.4 'Space Grotesk',sans-serif; margin:8px 0; }
 .result-copy p { display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden; }
 .store-results article .store-unit-actions { display:flex; flex-direction:column; gap:6px; }
 .store-unit-actions a { align-items:center; background:rgba(255,255,255,.7); border:1px solid #fff; border-radius:11px; color:#757d70; display:flex; font-size:9px; gap:5px; padding:9px; text-decoration:none; }

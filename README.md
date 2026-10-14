@@ -12,7 +12,7 @@ Instale as dependências com `pnpm install`, configure as variáveis conforme `.
 
 `src/data/tm-catalog.json` contém a consulta das páginas públicas da TM Runners. As imagens correspondentes são baixadas e otimizadas pelo CDN em WebP. `pnpm catalog:sync` atualiza os produtos encontrados nas sete categorias, seguindo a paginação da loja. O importador usa Node e o comando `curl`, mantém cache da consulta diária em `.cache/` e exclui roupas e produtos cujas fichas não possam ser verificadas.
 
-A classificação comercial da loja orienta as categorias. O material da placa vem da descrição técnica: fibra de vidro e nylon não são tratados como carbono. Peso de embalagem não é usado como peso do tênis. Dados não declarados ficam ausentes. Preço, tamanho e estoque atuais devem ser consultados na página do produto; este aplicativo não sincroniza inventário em tempo real.
+A classificação comercial da loja orienta as categorias. As sugestões filtram primeiro a categoria escolhida e, dentro dela, priorizam o maior preço consultado na loja (`priceCents`, em centavos de reais). A afinidade contextual desempata preços iguais; preços não informados ficam no fim. O preço é uma fotografia da consulta indicada em `checkedAt`, não um indicador técnico de performance. O material da placa vem da descrição técnica: fibra de vidro e nylon não são tratados como carbono. Peso de embalagem não é usado como peso do tênis. Dados não declarados ficam ausentes. Preço, tamanho e estoque atuais devem ser consultados na página do produto; este aplicativo não sincroniza inventário em tempo real.
 
 Logo oficial: https://www.mgsports.com.br/
 
